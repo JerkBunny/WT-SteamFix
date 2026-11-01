@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -6,11 +6,12 @@ using System.Reflection;
 using System.Text;
 
 [assembly: AssemblyTitle("WT-SteamFix")]
-[assembly: AssemblyDescription("War Thunder x Steam 启动修复助手")]
+[assembly: AssemblyDescription("War Thunder x Steam 启动修复助手 / Launcher fix for Steam")]
 [assembly: AssemblyProduct("WT-SteamFix")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyVersion("3.3.0.0")]
 [assembly: AssemblyFileVersion("3.3.0.0")]
+[assembly: AssemblyInformationalVersion("测试中 Beta")]
 
 static class Program
 {

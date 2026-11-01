@@ -1708,10 +1708,13 @@ if ($SelfTest) {
 try {
     Clear-Host
     Write-Host ''
-    Write-Host '  ╔════════════════════════════════════════════════════════════╗' -ForegroundColor DarkCyan
-    Write-Host '  ║      War Thunder × Steam   启动修复助手   v3.3             ║' -ForegroundColor DarkCyan
-    Write-Host '  ║   用 25 GB 的精简客户端，跳过 Steam 的 88 GB 更新           ║' -ForegroundColor DarkCyan
-    Write-Host '  ╚════════════════════════════════════════════════════════════╝' -ForegroundColor DarkCyan
+    $boxW = 60
+    Write-Host ('  ╔' + ('═' * $boxW) + '╗') -ForegroundColor DarkCyan
+    foreach ($ln in @('  War Thunder × Steam   启动修复助手   [ 测试中 / Beta ]',
+                      '  用 25 GB 的精简客户端，跳过 Steam 的 88 GB 更新')) {
+        Write-Host ('  ║' + (Pad-Display -Text $ln -Width $boxW) + '║') -ForegroundColor DarkCyan
+    }
+    Write-Host ('  ╚' + ('═' * $boxW) + '╝') -ForegroundColor DarkCyan
     if ($script:DryRun) { Write-Host '                          [ 演练模式：只看不做 ]' -ForegroundColor Yellow }
 
     if (-not $script:AssumeYes) {
