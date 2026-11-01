@@ -1,4 +1,4 @@
-War Thunder × Steam 启动修复助手   [ 测试中 / Beta ]
+﻿War Thunder × Steam 启动修复助手   [ 测试中 / Beta ]
 ====================================================
 
 它可以做什么
@@ -18,9 +18,9 @@ Steam 版战雷要更新 88 GB，你可能已经有官方启动器下好的 25 G
 Steam 只认带空格的那个名字，放这里：
 
     <你的游戏库>\steamapps\common\War Thunder
-    例如 G:\SteamLibrary\steamapps\common\War Thunder
+    例如 D:\SteamLibrary\steamapps\common\War Thunder
 
-官方启动器默认装在 G:\WarThunder（没有空格），所以：
+官方启动器默认装在 D:\WarThunder（没有空格，盘符看你装在哪），所以：
 
 · 放 common\WarThunder（没空格）→ Steam 不认，工具会提示并帮你改名
 · 把里面的内容复制进 common\War Thunder（有空格）→ 正确
@@ -50,6 +50,8 @@ Steam 只认带空格的那个名字，放这里：
 ------------
 · 提示"没有写权限"：右键 exe → 以管理员身份运行
 · 提示"找不到 Steam"：确认 Steam 位置，或用 -SteamPath 指定
+· 下载安装包卡住/失败：先关掉代理再试（跟着系统代理走的话，本地代理反而可能拖累），
+  仍不行就自己从战雷官网下载启动器，用 -InstallerPath 指定
 · 其它报错：logs\diagnostic_*.txt 里有诊断报告，把它发给帮忙的人
 
 文件在哪

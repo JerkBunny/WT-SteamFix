@@ -12,8 +12,8 @@
 
 ## 它可以做什么
 
-Steam 版战雷要更新 88 GB，你可能已经有官方启动器下好的 25 GB 精简版。
-本工具把这份精简版交给 Steam，让它直接开游戏，并照常用 Steam 账号登录。
+Steam 版战雷要更新 88 GB，你可能已经有官方启动器下好的 25 GB 最小化客户端。
+本工具把最小化客户端交给 Steam，让它直接开游戏，并照常用 Steam 账号登录。
 （不用绑定邮箱、手机号）
 
 ## 怎么用
@@ -33,11 +33,11 @@ WT-SteamFix.exe -Snapshot       # 建快照（acf + config.blk + 存档）
 WT-SteamFix.exe -Simulate       # 制造故障现场（同盘改名，秒级）
 WT-SteamFix.exe -UndoSimulate   # 撤销故障现场
 WT-SteamFix.exe -DownloadClient # 自动下载官方客户端
-WT-SteamFix.exe -SourcePath "G:\WarThunder"
-WT-SteamFix.exe -LibraryPath "G:\SteamLibrary"
-WT-SteamFix.exe -InstallerPath "D:\wt_launcher.exe"
+WT-SteamFix.exe -SourcePath "D:\WarThunder"        # 客户端放哪了（盘符换成你的）
+WT-SteamFix.exe -LibraryPath "D:\SteamLibrary"     # 你的 Steam 库在哪
+WT-SteamFix.exe -InstallerPath "C:\Users\你\Downloads\wt_launcher.exe"
 WT-SteamFix.exe -SkipMove -Yes  # 只修记录
-WT-SteamFix.exe -Proxy http://127.0.0.1:7890
+WT-SteamFix.exe -Proxy http://127.0.0.1:端口      # 仅在确实要走代理时才用
 ```
 
 ## 客户端应该放哪里？（最重要）
@@ -46,10 +46,13 @@ Steam 只认带空格的那个名字，放这里：
 
 ```
 <你的游戏库>\steamapps\common\War Thunder
-例如 G:\SteamLibrary\steamapps\common\War Thunder
+例如 D:\SteamLibrary\steamapps\common\War Thunder
 ```
 
-官方启动器默认装在 `G:\WarThunder`（没有空格），所以：
+官方启动器默认装在 `D:\WarThunder`（没有空格）——这里的盘符只是举例，
+实际装在哪取决于你在安装时选的位置，工具会自动去各个盘找。
+
+所以有两种情况：
 
 - 放 `common\WarThunder`（没空格）→ Steam 不认，工具会提示并帮你改名
 - 把里面的内容复制进 `common\War Thunder`（有空格）→ 正确
@@ -70,10 +73,10 @@ Steam 只认带空格的那个名字，放这里：
 
 ```
   写入前检查：
-    游戏目录    G:\SteamLibrary\steamapps\common\War Thunder
+    游戏目录    D:\SteamLibrary\steamapps\common\War Thunder
     文件大小    25.42 GB（4253 个文件）
     关键文件    launcher.exe ✓   win64\aces.exe ✓   aces.vromfs.bin ✓
-    Steam 库    G:\SteamLibrary
+    Steam 库    D:\SteamLibrary
     Steam 记录  目前没有，会新建一份
     接下来     会先关闭 Steam（存档不会丢），再写入安装记录
 ```
@@ -109,7 +112,7 @@ Steam 只认带空格的那个名字，放这里：
 
 ## 反馈
 
-不清楚去哪反馈，可以找大肥鱼之类的群友，
+不清楚去哪反馈，可以找大肥鱼或GPT之类的，
 或加 [@Jerkbunny61_Hana](https://t.me/Jerkbunny61_Hana)（Telegram）反馈。
 
 ---
@@ -183,8 +186,15 @@ powershell -ExecutionPolicy Bypass -File .\build\Build-Exe.ps1
   `curl --ssl-no-revoke` → `.NET`（关闭吊销检查）→ 本机已有的
   `wt_launcher*.exe` → 手动输入路径，并在安装前校验
   Authenticode 签名主体必须是 GAIJIN。
+- **代理不要照抄**：工具默认跟随系统代理，一般什么都不用填。
+  只有你明确知道自己挂了本地代理（如 Clash / v2rayN 监听 `127.0.0.1:7890` 之类）
+  且下载失败时，才用 `-Proxy` 显式指定，端口照抄别人的不一定对得上——
+  有的环境反而是**关掉代理**才连得通。
 - **无人值守会按剩余空间选库**：`-Yes` 且没有安装记录时选剩余空间最大的库，
   可能不是你放游戏的那个，建议手动选。
+- **路径别带特殊字符**：放在 `C:\Users\你\Desktop` 这类含中文、空格的
+  用户目录下一般没问题，但**别用网盘同步目录**（OneDrive 等）和只读的
+  `Program Files`，跨盘搬运 25 GB 还要看目标盘是否够空间。
 
 ## 免责声明
 
