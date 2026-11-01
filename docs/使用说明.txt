@@ -1,129 +1,87 @@
 War Thunder × Steam 启动修复助手   [ 测试中 / Beta ]
-========================================================
+====================================================
 
-────────────────────────────────────────────────
-中文
-────────────────────────────────────────────────
+它干什么 / What it does
+-----------------------
+Steam 版战雷要更新 88 GB，但你已经有官方启动器下好的 25 GB 精简版。
+本工具把精简版交给 Steam，直接开游戏，照常用 Steam 账号登录。
+Steam wants 88 GB for War Thunder, but you already have the 25 GB minimal
+client. This tool lets Steam launch it directly, and you keep signing in
+with your Steam account.
 
-【它能干什么】
-Steam 版的战雷要更新 88 GB，但你已经有官方启动器下好的 25 GB 精简版。
-本工具把这份精简版交给 Steam，让 Steam 直接开游戏，
-并且照常使用你的 Steam 账号登录（不用绑定邮箱手机号）。
 
-【怎么用】（三步）
+三步 / 3 steps
+--------------
 1. 双击 WT-SteamFix.exe
-2. 第一屏按任意键开始（不按也会 15 秒后自动继续），之后一路按回车（默认就是"可以"）
-3. 看到 "全部完成" 就 OK 了
+   Double-click WT-SteamFix.exe
+2. 第一屏按任意键（15 秒自动继续），之后一路回车
+   Press any key on the first screen (auto-continues after 15 s),
+   then press Enter for everything else
+3. 看到「全部完成」就成了
+   Done when you see "全部完成"
 
-中间有一屏「写入前检查」，会把游戏目录、大小、关键文件、
-要改的 Steam 记录列出来，确认没问题再按回车。
+中途会有一屏「写入前检查」，列出目录、大小、关键文件、要改的记录，确认后再回车。
+A "check before writing" screen shows the folder, size, key files and the
+record it will change. Confirm with Enter.
 
-之后在 Steam 库里点「开始游戏」。
 
-【客户端到底放哪儿？】这一段最重要
-必须放进的目录（Steam 只认这个名字，中间【有一个空格】）：
+客户端放哪儿 / Where the client goes  ★最重要
+---------------------------------------------
+Steam 只认这个名字，中间【有一个空格】：
+Steam only accepts this exact name, WITH a space:
 
-    <你的游戏库>\steamapps\common\War Thunder
-    例如：G:\SteamLibrary\steamapps\common\War Thunder
+    <游戏库>\steamapps\common\War Thunder
+    例 / e.g.  G:\SteamLibrary\steamapps\common\War Thunder
 
-而战雷官方启动器默认装在：
+官方启动器默认装在 G:\WarThunder（没有空格），所以：
+The official launcher installs into G:\WarThunder (no space), so either:
 
-    G:\WarThunder            ← 没有空格！
+  放成 common\WarThunder（没空格）→ Steam 不认，工具会提示并帮你改名
+  Dropped it into common\WarThunder (no space) → Steam ignores it;
+  the tool warns you and offers to rename it
 
-所以有两种情况：
+  复制内容进 common\War Thunder（有空格）→ 正确
+  Contents inside common\War Thunder (with space) → correct
 
-  情况 A：你把官方启动器的文件夹直接放进去了
-          → common\WarThunder（没空格）→ Steam 不认，工具会提示并帮你改名
+· 复制启动器文件夹【里面的所有内容】，不要多套一层
+  （放好后 common\War Thunder\launcher.exe 应能直接看到）
+  Copy what is INSIDE the launcher folder, don't nest it
+  (common\War Thunder\launcher.exe must be directly visible)
 
-  情况 B：你把里面的文件复制进 common\War Thunder（有空格）→ 正确
+· .launcher_log、.game_logs、cache 不用复制，复制了也无妨
+  .launcher_log, .game_logs, cache are optional; harmless if copied
 
-工具会自动识别这两种目录名，发现名字不对会直接提醒你，并问要不要帮你挪过去。
 
-【放的时候注意】
-· 复制官方启动器文件夹【里面的所有内容】，不是文件夹本身套一层
-  （放好后 common\War Thunder\launcher.exe 要能直接看到）
-· 不用复制 .launcher_log、.game_logs、cache 这些，复制了也没关系
+会关 Steam / Steam will be closed
+----------------------------------
+改安装记录前必须先关 Steam。工具会先提示、先备份，再关；存档不受影响。
+Steam must be closed while the install record is rewritten. The tool warns
+first, backs it up, then closes it. Saves are untouched.
 
-【过程中会关掉 Steam】
-改 Steam 的安装记录之前必须先关 Steam。工具会提前提示，
-如果你正在玩别的游戏或正在下载，先自己退出/暂停，然后按回车让它关。
 
-【一定要记住】
+记住 / Remember
+---------------
 · 不要点 Steam 的「验证游戏文件完整性」——会重新下 88 GB
-· 战雷每次大版本更新后，重新运行一次本工具就行
-· 第一次运行如果被 Windows 拦下，点「更多信息」→「仍要运行」
+  Never click "Verify integrity of game files" — it re-downloads 88 GB
+· 战雷每次大更新后，重跑一次本工具
+  After every major update, just run this tool again
+· 被 Windows 拦下 → 更多信息 → 仍要运行
+  Blocked by Windows → "More info" → "Run anyway"
 
-【出问题怎么办】
-· 提示"没有写权限"：右键 exe → 以管理员身份运行
-· 提示"找不到 Steam"：确认 Steam 装在 E:\steam，或用 -SteamPath 指定
-· 其它报错：logs\diagnostic_*.txt 里有诊断报告，把它发给帮忙的人
 
-【文件在哪】
-· 日志      logs\
-· 备份      backup\（每次修改前的 Steam 记录）
-· 快照      snapshots\（菜单 5 里可以还原）
-· 临时文件  .work\
+出问题 / Troubleshooting
+------------------------
+· 没有写权限 / no write permission：右键 exe → 以管理员身份运行
+  right-click the exe → Run as administrator
+· 找不到 Steam / Steam not found：-SteamPath 指定 Steam 目录
+  pass -SteamPath with your Steam folder
+· 其它报错 / anything else：logs\diagnostic_*.txt 里有诊断报告
+  a diagnostics report is in logs\diagnostic_*.txt
 
-────────────────────────────────────────────────
-English
-────────────────────────────────────────────────
 
-[What it does]
-Steam wants to download an 88 GB update for War Thunder, but you already
-have the 25 GB minimal client from the official launcher. This tool hands
-that client to Steam so it launches the game directly, and you still sign
-in with your Steam account.
-
-[How to use] (3 steps)
-1. Double-click WT-SteamFix.exe
-2. Press any key on the first screen (it continues by itself after 15 s),
-   then just keep pressing Enter (the default is "yes")
-3. When you see "全部完成" (all done), you are finished
-
-In the middle there is a "check before writing" screen listing the game
-folder, its size, key files and the Steam record that will be changed.
-
-Afterwards press Play in your Steam library.
-
-[Where must the client go?] Most important part
-Steam only accepts this exact folder name (note the SPACE):
-
-    <your library>\steamapps\common\War Thunder
-    e.g. G:\SteamLibrary\steamapps\common\War Thunder
-
-The official launcher meanwhile installs into:
-
-    G:\WarThunder            <- no space!
-
-So either:
-
-  A) You dropped the launcher folder into common\WarThunder (no space)
-     -> Steam ignores it; the tool warns you and offers to rename it
-  B) You copied its contents into common\War Thunder (with space) -> correct
-
-The tool recognises both names and will tell you if the folder is wrong.
-
-[While copying]
-- Copy everything INSIDE the launcher folder, not the folder itself
-  (afterwards common\War Thunder\launcher.exe must be directly visible)
-- You do not need .launcher_log, .game_logs or cache; harmless if copied
-
-[Steam will be closed]
-Steam must not be running while its install record is rewritten. The tool
-warns you first, backs up the record, then closes it. Saves are not touched.
-
-[Remember]
-- Never click "Verify integrity of game files" in Steam: it downloads 88 GB again
-- After every major War Thunder update, just run this tool again
-- If Windows blocks the exe, choose "More info" -> "Run anyway"
-
-[If something goes wrong]
-- "no write permission": right-click the exe -> Run as administrator
-- "Steam not found": pass -SteamPath with your Steam folder
-- Anything else: a diagnostics report is written to logs\diagnostic_*.txt
-
-[Where the files are]
-- logs       logs\
-- backup     backup\ (the Steam record before each change)
-- snapshots  snapshots\ (restore from menu 5)
-- temp       .work\
+文件在哪 / Where files go
+-------------------------
+  logs\       日志 / logs
+  backup\     改动前的 Steam 记录 / Steam record before each change
+  snapshots\  快照，菜单 5 可还原 / snapshots, restore from menu 5
+  .work\      临时文件 / temp
