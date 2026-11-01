@@ -149,6 +149,7 @@ Steam 判断"要不要更新"，看的是 `steamapps\appmanifest_236390.acf` 里
 │   ├── WT-SteamFix.exe
 │   └── 使用说明.txt
 ├── .github/workflows/build.yml
+├── PUBLISHING.md            # 维护者：怎么发版、踩过的坑
 └── README.md
 ```
 
@@ -176,6 +177,17 @@ powershell -ExecutionPolicy Bypass -File .\build\Build-Exe.ps1
 ```powershell
 .\src\WT-SteamFix.cmd
 ```
+
+## 发版
+
+打标签推上去就会自动构建并发布 Release：
+
+```powershell
+git tag v3.3.0-beta.2
+git push origin v3.3.0-beta.2
+```
+
+完整流程、版本号规则和踩过的坑见 [PUBLISHING.md](PUBLISHING.md)。
 
 ## 已知问题
 
