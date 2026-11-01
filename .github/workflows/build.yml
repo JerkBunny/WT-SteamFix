@@ -21,18 +21,66 @@ jobs:
         shell: pwsh
         run: ./build/Build-Exe.ps1
 
+      # 把说明文档复制成 ASCII 文件名再上传，
+      # 避免中文附件名在 Release 页面被转成 default.txt
+      - name: Stage assets
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path out | Out-Null
+          Copy-Item 'dist/WT-SteamFix.exe' 'out/WT-SteamFix.exe'
+          Copy-Item 'dist/使用说明.txt' 'out/GUIDE-zh-CN.txt'
+          Get-ChildItem out | Format-Table Name, Length
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: WT-SteamFix
           path: |
-            dist/WT-SteamFix.exe
-            dist/使用说明.txt
+            out/WT-SteamFix.exe
+            out/GUIDE-zh-CN.txt
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/WT-SteamFix.exe
-            dist/使用说明.txt
+            out/WT-SteamFix.exe
+            out/GUIDE-zh-CN.txt
+          # 版本号带 beta / rc 等字样时自动标记为预发布
+          prerelease: ${{ contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc') || contains(github.ref_name, 'alpha') }}
+          generate_release_notes: true
+          body: |
+            ## War Thunder × Steam 启动修复助手　[测试中 / Beta]
+
+            让 Steam 版《战争雷霆》直接用官方启动器下载的 **25 GB 最小化客户端**启动，
+            跳过 Steam 的完整版更新，同时保留 **Steam 账号登录**。
+
+            ### 下载哪个
+
+            | 文件 | 说明 |
+            |---|---|
+            | `WT-SteamFix.exe` | 主程序，双击即用，**只需要这一个文件** |
+            | `GUIDE-zh-CN.txt` | 使用说明（也可在线看 [README](https://github.com/JerkBunny/WT-SteamFix#readme)） |
+
+            ### 三步上手
+
+            1. 打开 `WT-SteamFix.exe`
+            2. 根据你的需要输入就行（第一页按任意键继续，15 秒不按也会自动往下走）
+            3. 启动 Steam 后能正常启动战雷，就算成功了
+
+            ### 客户端放哪里
+
+            ```
+            <你的游戏库>\steamapps\common\War Thunder
+            ```
+
+            官方启动器默认装在 `D:\WarThunder`（没有空格），目录名不对工具会提示并帮你改名。
+
+            ### 注意
+
+            - 不要点 Steam 的「验证游戏文件完整性」——会重新触发完整版下载
+            - 战雷每次大版本建议在启动器完成，之后若出现抽风可重新使用本工具
+            - 第一次运行如果被 Windows 拦下，点「更多信息」→「仍要运行」
+            - 这是**测试版**，出问题请带 `logs\diagnostic_*.txt` 反馈
+
+            反馈：找大肥鱼或 GPT 之类的，或加 @Jerkbunny61_Hana（Telegram）
