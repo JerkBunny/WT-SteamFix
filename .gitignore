@@ -1,0 +1,23 @@
+# ---- 构建产物（源码里不保存 exe）----
+/dist/
+*.exe
+*.dll
+
+# ---- 程序运行时自己生成的数据 ----
+/logs/
+/backup/
+/snapshots/
+/.work/
+**/.runtime/
+/steamcmd/
+/build/cache/
+/build/app.ico
+
+# ---- 与本项目无关的临时文件 ----
+/test/
+/asarcheck/
+
+# ---- 系统垃圾 ----
+Thumbs.db
+desktop.ini
+.DS_Store
