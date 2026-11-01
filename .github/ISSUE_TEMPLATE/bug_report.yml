@@ -1,0 +1,96 @@
+name: 问题反馈
+description: 工具用不了、报错、或者结果不对
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！填写下面几项能让我更快定位问题。
+        标着 **必填** 的漏了会很难查。
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么
+      description: 一句话说清楚：想做什么、实际发生了什么
+      placeholder: 比如：运行后提示找不到 Steam，但我 Steam 明明装着
+    validations:
+      required: true
+
+  - type: dropdown
+    id: client-source
+    attributes:
+      label: 战雷客户端是哪来的
+      options:
+        - 官方启动器下载的 25 GB 精简版
+        - Steam 下载的完整版
+        - 不确定
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows 版本
+      description: 按 Win+R 输入 winver 可以看
+      placeholder: 比如 Windows 10 22H2
+    validations:
+      required: true
+
+  - type: input
+    id: steam-path
+    attributes:
+      label: Steam 装在哪个位置
+      placeholder: 比如 C:\Program Files (x86)\Steam
+    validations:
+      required: false
+
+  - type: input
+    id: library-path
+    attributes:
+      label: 游戏库在哪个盘
+      placeholder: 比如 D:\SteamLibrary
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开 WT-SteamFix.exe
+        2. ...
+        3. 然后出错了
+    validations:
+      required: false
+
+  - type: textarea
+    id: output
+    attributes:
+      label: 屏幕上显示了什么
+      description: 把提示文字复制过来，或直接截图。不要只写"报错了"
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnostic
+    attributes:
+      label: 诊断日志
+      description: |
+        工具目录下的 logs\diagnostic_*.txt 里有一份诊断报告，请把内容贴在这里。
+        日志里不包含账号密码，可以放心贴。
+      render: text
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: 请确认
+      options:
+        - label: 我已经把 Steam 完全退出后再试过一次
+          required: false
+        - label: 我没有点过 Steam 的「验证游戏文件完整性」
+          required: false

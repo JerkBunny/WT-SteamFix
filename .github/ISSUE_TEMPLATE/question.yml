@@ -1,0 +1,40 @@
+name: 使用提问
+description: 不知道怎么用、不确定自己的情况适不适合
+title: "[问题] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        提问前先看一眼 [README](https://github.com/JerkBunny/WT-SteamFix#readme) 的
+        「客户端应该放哪里」和「出问题怎么办」两节，很多情况都写过了。
+
+  - type: textarea
+    id: question
+    attributes:
+      label: 你的问题
+      description: 说清楚你现在的情况和卡在哪
+    validations:
+      required: true
+
+  - type: dropdown
+    id: situation
+    attributes:
+      label: 你的情况最接近哪种
+      options:
+        - 客户端已经下好了，只是想让它能在 Steam 里启动
+        - 客户端还没下，想用工具自动下载
+        - 工具跑完了但游戏还是不出现在 Steam 库里
+        - 游戏能启动但登录不了
+        - 其它
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: 补充信息
+      description: 截图、报错文字、目录结构都可以
+      render: text
+    validations:
+      required: false
